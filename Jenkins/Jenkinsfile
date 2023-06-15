@@ -57,6 +57,10 @@ podTemplate(containers: [
              }  else {
                 echo "***** NO DEPLOY - Doing somthing else. Testing? *********"
              }
+
+	      	def valuesYaml = "${env.WORKSPACE}/spring-petclinic/chart/values.yaml"
+                // Use sed to update the tag in values.yaml
+                sh "sed -i 's|tag:.*|tag: ${apptag}|' ${valuesYaml}"    
            }
         } //end deploy
     }
